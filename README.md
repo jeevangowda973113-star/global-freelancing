@@ -34,6 +34,15 @@ The first backend milestone uses Supabase Auth + PostgreSQL with Row Level Secur
 - `POST /api/services` — save an authenticated user's service as a draft.
 - `GET /api/projects` — list open projects.
 - `POST /api/projects` — save an authenticated user's project as a draft.
+- `GET /api/profiles` — read the signed-in user's profile.
+- `PATCH /api/profiles` — update supported profile fields.
+- `GET /api/proposals` — list proposals visible to the signed-in user under RLS.
+- `POST /api/proposals` — submit a proposal to an open project.
+- `GET /api/conversations` — list the signed-in user's conversation memberships.
+- `POST /api/conversations` — create a private two-member conversation using the database RPC.
+- `GET /api/messages?conversation_id=<uuid>` — list messages in a conversation the user belongs to.
+- `POST /api/messages` — send a message in a conversation the user belongs to.
+- `POST /api/reports` — report exactly one profile, service, or project.
 - `POST /api/health` is not supported; health is checked with `GET /api/health`.
 
 Authenticated POST requests require `Authorization: Bearer <Supabase access token>`. API requests use the caller's token so Supabase RLS remains in force.
@@ -73,3 +82,10 @@ Before deploying, add these environment variables in Netlify:
 Then redeploy the site. In Supabase Authentication settings, configure the site URL and allowed redirect URLs to match the Netlify site URL. If email confirmation is enabled, new users must confirm their email before signing in.
 
 The database trigger creates a basic profile after signup. This is an early authentication foundation, not a complete trust, identity-verification, payment, or moderation system.
+
+
+### Backend API coverage added
+
+The Netlify Functions now include profile read/update, proposal submission/listing, private conversation creation/listing, message read/send, and report submission. These routes use the signed-in user's Supabase access token and depend on database RLS policies for authorization. Conversation membership is created through the `start_conversation` database function; clients cannot directly insert membership rows.
+
+This is still an MVP backend foundation. It does not yet include production rate limiting, moderator/admin review tools, file uploads, payment processing, dispute handling, anti-fraud detection, or independent penetration testing. Do not treat reports as automatically reviewed, and do not use this for real-money transactions until the relevant legal, provider, and security work is completed.
