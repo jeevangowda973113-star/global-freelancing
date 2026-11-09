@@ -37,3 +37,33 @@
 .footer-bottom{border-top:1px solid var(--line);padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#7f899d;font-size:10px}
 @media(max-width:900px){.footer-columns{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:34px}}
 @media(max-width:600px){.footer-columns{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 20px}.footer-column a{font-size:11px}.footer-bottom{align-items:flex-start;flex-direction:column;gap:13px}}
+
+/* Dark Fiverr-inspired marketplace refresh — Global Freelancing */
+.site-header{height:76px;background:rgba(10,13,20,.96);padding-inline:max(4.5vw,24px)}
+.brand{font-size:20px;letter-spacing:-1px}.brand-mark{border-radius:9px;background:var(--mint);color:#101a17}
+.main-nav{gap:30px;font-weight:600}.header-actions{gap:18px}
+.marketplace-hero{min-height:570px;padding:82px max(7vw,30px) 76px;grid-template-columns:1.12fr .88fr;background:radial-gradient(ellipse at 78% 46%,rgba(119,103,211,.19),transparent 38%),linear-gradient(120deg,#0d111a 0%,#12182a 58%,#101521 100%)}
+.marketplace-hero h1{font-size:clamp(48px,5vw,68px);letter-spacing:-3px}
+.marketplace-hero .hero-copy{max-width:560px;font-size:15px}
+.marketplace-hero .search-bar{width:min(650px,100%);border-radius:12px;background:#fff}
+.marketplace-hero .search-submit{border-radius:9px}
+.market-category-nav{min-height:54px;padding:13px max(5vw,24px);display:flex;align-items:center;justify-content:center;gap:clamp(14px,2.6vw,38px);flex-wrap:wrap;background:#111722;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.market-category-nav a{font-size:11px;color:#aeb7c8;font-weight:600;white-space:nowrap}.market-category-nav a:hover{color:var(--mint)}
+.hero-proof{display:flex;align-items:center;gap:10px;margin-top:25px;color:#8994a8;font-size:10px}.hero-proof span{color:var(--mint)}.hero-proof i{width:3px;height:3px;border-radius:50%;background:#657087}
+.marketplace-art{height:370px}.market-art-glow{position:absolute;width:330px;height:330px;border-radius:50%;background:rgba(145,125,255,.17);filter:blur(55px)}
+.market-art-card{position:absolute;border:1px solid rgba(255,255,255,.14);border-radius:19px;box-shadow:0 25px 70px rgba(0,0,0,.42);display:flex;flex-direction:column}
+.market-art-back{width:230px;height:270px;right:5%;top:38px;padding:25px;background:linear-gradient(145deg,#3e4267,#20263c);transform:rotate(9deg);justify-content:space-between}
+.market-art-back span,.market-art-back small{font-size:8px;letter-spacing:2px;color:#c7c0ff;font-weight:800}.market-art-back b{font:800 32px Manrope;line-height:1.05}
+.market-art-front{width:255px;height:245px;left:3%;top:95px;padding:22px;background:linear-gradient(145deg,#252d40,#151c2c);transform:rotate(-6deg);z-index:2}
+.market-art-top{display:flex;justify-content:space-between;font-size:8px;letter-spacing:1px;color:#aab5c9;font-weight:800}.market-live{color:#9de9bf}
+.market-art-avatars{display:flex;margin:27px 0 17px}.market-art-avatars i{font-style:normal;width:34px;height:34px;border-radius:50%;border:2px solid #252d40;margin-right:-7px;display:grid;place-items:center;background:#d5a58f;color:#38251f;font-size:10px;font-weight:800}
+.market-art-avatars i:nth-child(2){background:#a8d3c0;color:#204738}.market-art-avatars i:nth-child(3){background:#b9b0e8;color:#332b5d}.market-art-avatars i:nth-child(4){background:#d4d9e4;color:#2b3444}
+.market-art-front>b{font:800 22px Manrope;line-height:1.12}.market-art-front>small{color:#9aa6ba;font-size:9px;margin-top:9px}
+.market-float{position:absolute;z-index:3;padding:12px 15px;border-radius:10px;background:#202a3b;border:1px solid rgba(255,255,255,.12);box-shadow:0 12px 32px #090d16;font-size:10px;color:#e5e8f1}
+.market-float-one{right:0;top:42px;color:#c7bdff}.market-float-one span{color:#e5e8f1;margin-left:6px}.market-float-two{right:0;bottom:35px}.market-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8ce3ae;margin-right:7px}
+.categories-section{padding-top:75px}.category-card{background:#171d2a;border:1px solid rgba(255,255,255,.07);transition:transform .2s,border-color .2s,background .2s}
+.category-card:hover,.category-card.active{background:#20283a;border-color:rgba(182,241,209,.35);transform:translateY(-2px)}
+.service-card{background:#171d2a;border-color:rgba(255,255,255,.08)}.services-section .section-heading p{max-width:520px}
+.demo-tag{color:#c2b9ff;background:#292640;border-color:#514879}.site-footer{background:#090c12}
+@media(max-width:900px){.marketplace-hero{grid-template-columns:1fr;padding-top:65px}.marketplace-art{max-width:520px;width:100%;margin:20px auto 0}.market-category-nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}}
+@media(max-width:600px){.marketplace-hero{padding:62px 7vw 38px}.marketplace-hero h1{font-size:43px}.marketplace-art{height:290px}.market-art-back{right:3%;width:190px;height:220px}.market-art-front{left:2%;top:72px;width:220px;height:205px}.market-art-front>b{font-size:19px}.market-float-one{top:16px}.market-float-two{bottom:10px}.market-category-nav{padding-inline:7vw}}
