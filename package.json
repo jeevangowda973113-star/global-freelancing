@@ -1,0 +1,13 @@
+{
+  "name": "global-freelancing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "An early-stage global freelancing marketplace.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node --check netlify/functions/health.mjs"
+  }
+}
