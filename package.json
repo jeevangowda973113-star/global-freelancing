@@ -8,6 +8,6 @@
     "node": ">=20"
   },
   "scripts": {
-    "check": "node --check netlify/functions/health.mjs && node --check netlify/functions/_shared/supabase.mjs && node --check netlify/functions/services.mjs && node --check netlify/functions/projects.mjs && node --check netlify/functions/config.mjs && node --check app.js"
+    "check": "node --check netlify/functions/health.mjs && node --check netlify/functions/_shared/supabase.mjs && node --check netlify/functions/config.mjs && node --check netlify/functions/services.mjs && node --check netlify/functions/projects.mjs && node --check netlify/functions/profiles.mjs && node --check netlify/functions/proposals.mjs && node --check netlify/functions/conversations.mjs && node --check netlify/functions/messages.mjs && node --check netlify/functions/reports.mjs && node --check app.js"
   }
 }
