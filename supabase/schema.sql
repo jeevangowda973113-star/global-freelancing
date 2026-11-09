@@ -211,27 +211,65 @@ drop policy if exists "Freelancers update own proposals" on public.proposals;
 create policy "Freelancers update own proposals" on public.proposals for update using (freelancer_id = auth.uid())
 with check (freelancer_id = auth.uid());
 
+-- Security-definer helper avoids recursive RLS when checking conversation membership.
+create or replace function public.is_conversation_member(p_conversation_id uuid)
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $
+  select exists (
+    select 1 from public.conversation_members cm
+    where cm.conversation_id = p_conversation_id and cm.member_id = auth.uid()
+  );
+$;
+
+-- Start a private two-person conversation. Membership rows are never client-insertable.
+create or replace function public.start_conversation(p_other_member uuid)
+returns uuid
+language plpgsql
+security definer
+set search_path = ''
+as $
+declare
+  new_conversation_id uuid;
+begin
+  if auth.uid() is null or p_other_member is null or p_other_member = auth.uid() then
+    raise exception 'A valid signed-in participant is required';
+  end if;
+  if not exists (select 1 from public.profiles p where p.id = p_other_member) then
+    raise exception 'Participant not found';
+  end if;
+
+  insert into public.conversations default values returning id into new_conversation_id;
+  insert into public.conversation_members (conversation_id, member_id)
+  values (new_conversation_id, auth.uid()), (new_conversation_id, p_other_member);
+  return new_conversation_id;
+end;
+$;
+
+revoke all on function public.is_conversation_member(uuid) from public;
+grant execute on function public.is_conversation_member(uuid) to authenticated;
+revoke all on function public.start_conversation(uuid) from public;
+grant execute on function public.start_conversation(uuid) to authenticated;
+
 -- Conversation rows and messages are visible only to conversation members.
 drop policy if exists "Members read conversations" on public.conversations;
 create policy "Members read conversations" on public.conversations for select using (
-  exists (select 1 from public.conversation_members cm where cm.conversation_id = id and cm.member_id = auth.uid())
+  public.is_conversation_member(id)
 );
 drop policy if exists "Members read membership" on public.conversation_members;
 create policy "Members read membership" on public.conversation_members for select using (
-  member_id = auth.uid() or exists (
-    select 1 from public.conversation_members mine
-    where mine.conversation_id = conversation_id and mine.member_id = auth.uid()
-  )
+  public.is_conversation_member(conversation_id)
 );
 drop policy if exists "Members read messages" on public.messages;
 create policy "Members read messages" on public.messages for select using (
-  exists (select 1 from public.conversation_members cm where cm.conversation_id = conversation_id and cm.member_id = auth.uid())
+  public.is_conversation_member(conversation_id)
 );
 drop policy if exists "Members send messages" on public.messages;
 create policy "Members send messages" on public.messages for insert with check (
-  sender_id = auth.uid() and exists (
-    select 1 from public.conversation_members cm where cm.conversation_id = conversation_id and cm.member_id = auth.uid()
-  )
+  sender_id = auth.uid() and public.is_conversation_member(conversation_id)
 );
 
 -- Reports are private to the reporter. A future moderator role/workflow will review them.
