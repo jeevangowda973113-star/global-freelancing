@@ -112,3 +112,14 @@
 @media(max-width:620px){.marketplace-hero{grid-template-columns:1fr;padding-top:72px}.marketplace-art{height:320px;margin-top:18px}.market-art-back{right:9%;top:8px;width:205px;height:230px}.market-art-front{left:5%;bottom:12px;width:230px;height:205px}.market-art-back b{font-size:27px;margin:16px 0}.market-float-one{right:0;top:20px}.market-float-two{left:0;bottom:0}.service-grid{grid-template-columns:1fr}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.market-category-nav{top:68px}}
 
 .signup-progress{margin:18px 0 22px}.signup-progress>span{font-size:10px;color:#aeb8ca}.signup-progress-track{height:4px;background:#30384b;border-radius:9px;margin-top:9px;overflow:hidden}.signup-progress-track i{display:block;height:100%;width:33.333%;background:#a6e4c3;transition:width .2s}.signup-step h3{font:700 16px Manrope;margin:0 0 16px}.signup-step label{display:block;color:#cbd1df;font-size:11px;font-weight:700;margin:13px 0}.signup-step input,.signup-step select,.signup-step textarea{display:block;width:100%;margin-top:7px;padding:12px;border-radius:9px;border:1px solid #353d51;background:#111724;color:#eef1f8;font:inherit}.signup-step select{color-scheme:dark}.signup-hint{font-size:10px!important;color:#8f9bb0!important;line-height:1.6}.optional-label{color:#8792a6;font-weight:400}.consent-row{display:flex!important;align-items:flex-start;gap:9px;line-height:1.5}.consent-row input{width:16px!important;height:16px;margin:0!important;flex:0 0 auto}.signup-actions{display:flex;gap:10px;margin-top:10px}.signup-actions[hidden]{display:none}.signup-actions .modal-button{margin:0;flex:1}.auth-step-back{padding:12px 16px;border-radius:9px;border:1px solid #3a4358;background:#202638;color:#d9dfeb}.signup-step[hidden],#signinFields[hidden],#signupSteps[hidden]{display:none!important}
+
+/* Global Freelancing logo and tagline */
+.brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
+.brand-logo{width:47px;height:47px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(25,230,189,.16))}
+.brand-wordmark{display:flex;flex-direction:column;gap:3px;font-family:Manrope,sans-serif;font-size:18px;font-weight:800;letter-spacing:-.7px;line-height:1}
+.brand-wordmark>span{color:#f5f7fb}
+.brand-wordmark .brand-light{color:#85ef76;margin-left:4px}
+.brand-wordmark small{font-family:"DM Sans",sans-serif;font-size:7px;letter-spacing:1.15px;font-weight:700;color:#94a2b4}
+.brand-wordmark small i{font-style:normal;color:#50e5a5;margin:0 2px}
+.hero-proof b{color:#6df2a0}
+@media(max-width:520px){.brand-logo{width:39px;height:39px}.brand-wordmark{font-size:15px}.brand-wordmark small{font-size:6px;letter-spacing:.8px}}
