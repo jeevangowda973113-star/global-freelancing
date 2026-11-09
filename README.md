@@ -19,6 +19,27 @@ This repository contains a static, responsive marketplace homepage prototype bui
 ### Important status
 The displayed sellers and services are sample content only. This version does not yet include real accounts, identity verification, secure messaging, database storage, job posting, moderation workflows, or payments. Those features must be built and tested before the platform is used by real clients or freelancers.
 
+## Backend foundation
+
+The first backend milestone uses Supabase Auth + PostgreSQL with Row Level Security (RLS), and Netlify Functions for API routes.
+
+### Setup required before the backend can run
+1. Create a Supabase project.
+2. Open the Supabase SQL Editor and run the complete file at [supabase/schema.sql](supabase/schema.sql).
+3. In Netlify, add `SUPABASE_URL` and `SUPABASE_ANON_KEY` as environment variables. Use the project's public/anon key only; never place a service-role key in the browser or Git.
+4. Deploy the repository to Netlify when ready. The health endpoint will be available at `/api/health`.
+
+### API routes
+- `GET /api/services` — list active service listings.
+- `POST /api/services` — save an authenticated user's service as a draft.
+- `GET /api/projects` — list open projects.
+- `POST /api/projects` — save an authenticated user's project as a draft.
+- `POST /api/health` is not supported; health is checked with `GET /api/health`.
+
+Authenticated POST requests require `Authorization: Bearer <Supabase access token>`. API requests use the caller's token so Supabase RLS remains in force.
+
+The schema also establishes profiles, proposals, private conversations/messages, and user-submitted reports. Those workflows still need frontend integration, abuse controls, moderator tools, and security testing. Draft records are not publicly listed.
+
 ## Run locally
 
 Open `index.html` in a browser, or use a simple local static server.
