@@ -218,12 +218,12 @@ language sql
 stable
 security definer
 set search_path = ''
-as $
+as $$
   select exists (
     select 1 from public.conversation_members cm
     where cm.conversation_id = p_conversation_id and cm.member_id = auth.uid()
   );
-$;
+$$;
 
 -- Start a private two-person conversation. Membership rows are never client-insertable.
 create or replace function public.start_conversation(p_other_member uuid)
@@ -231,7 +231,7 @@ returns uuid
 language plpgsql
 security definer
 set search_path = ''
-as $
+as $$
 declare
   new_conversation_id uuid;
 begin
@@ -247,7 +247,7 @@ begin
   values (new_conversation_id, auth.uid()), (new_conversation_id, p_other_member);
   return new_conversation_id;
 end;
-$;
+$$;
 
 revoke all on function public.is_conversation_member(uuid) from public;
 grant execute on function public.is_conversation_member(uuid) to authenticated;
