@@ -41,6 +41,12 @@ const authSubmit = document.getElementById("authSubmit");
 const nameLabel = document.getElementById("nameLabel");
 const displayName = document.getElementById("displayName");
 const authPassword = document.getElementById("authPassword");
+let signupStep = 1;
+const signupSteps = document.getElementById("signupSteps");
+const signupActions = document.getElementById("signupActions");
+const signinFields = document.getElementById("signinFields");
+const signupNext = document.getElementById("signupNext");
+const signupBack = document.getElementById("signupBack");
 const signInTab = document.getElementById("showSignIn");
 const signUpTab = document.getElementById("showSignUp");
 const signOutButton = document.getElementById("signOutBtn");
@@ -53,9 +59,20 @@ function setMessage(message, kind = "") {
 function setMode(mode) {
   authMode = mode;
   const signingUp = mode === "signup";
-  nameLabel.hidden = !signingUp;
-  displayName.required = signingUp;
-  authPassword.autocomplete = signingUp ? "new-password" : "current-password";
+  nameLabel.hidden = true;
+  signupSteps.hidden = !signingUp;
+  signinFields.hidden = signingUp;
+  signupActions.hidden = !signingUp;
+  authSubmit.hidden = signingUp;
+  document.getElementById("authEmail").disabled = !signingUp;
+  document.getElementById("authPassword").disabled = !signingUp;
+  document.getElementById("authEmailSignin").disabled = signingUp;
+  document.getElementById("authPasswordSignin").disabled = signingUp;
+  document.getElementById("authEmailSignin").required = !signingUp;
+  document.getElementById("authPasswordSignin").required = !signingUp;
+  document.getElementById("authEmail").required = signingUp;
+  document.getElementById("authPassword").required = signingUp;
+  signupStep = 1; renderSignupStep();
   document.getElementById("modalTitle").textContent = signingUp ? "Create your account." : "Welcome back.";
   document.getElementById("authIntro").textContent = signingUp ? "Join the community and set up your profile." : "Sign in to continue to your marketplace account.";
   authSubmit.textContent = signingUp ? "Create account" : "Sign in";
@@ -65,7 +82,7 @@ function setMode(mode) {
 }
 function openAuth(mode) {
   modal.hidden = false; signOutButton.hidden = true; authForm.hidden = false; setMode(mode);
-  document.getElementById("authEmail").focus();
+  (mode === "signup" ? document.getElementById("accountType") : document.getElementById("authEmailSignin")).focus();
 }
 function closeModal() { modal.hidden = true; }
 ["signInBtn", "joinBtn", "ctaJoin"].forEach((id) => {
@@ -98,21 +115,42 @@ signOutButton.addEventListener("click", async () => {
   else { closeModal(); updateAccountUI(null); }
 });
 
+function renderSignupStep() {
+  document.querySelectorAll(".signup-step").forEach((step) => { step.hidden = Number(step.dataset.step) !== signupStep; });
+  document.getElementById("signupProgressText").textContent = `Step ${signupStep} of 3`;
+  document.getElementById("signupProgressBar").style.width = `${signupStep / 3 * 100}%`;
+  signupBack.disabled = signupStep === 1;
+  signupNext.textContent = signupStep === 3 ? "Create account" : "Continue";
+  authSubmit.hidden = authMode === "signup";
+}
+function validateSignupStep() {
+  const fields = signupSteps.querySelector(`.signup-step[data-step="${signupStep}"]`).querySelectorAll("input,select,textarea");
+  for (const field of fields) if (field.required && !field.checkValidity()) { field.reportValidity(); return false; }
+  return true;
+}
+signupNext.addEventListener("click", () => { if (!validateSignupStep()) return; if (signupStep < 3) { signupStep++; renderSignupStep(); } else authForm.requestSubmit(); });
+signupBack.addEventListener("click", () => { if (signupStep > 1) { signupStep--; renderSignupStep(); } });
+
 authForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!supabase) { setMessage("Authentication is not configured on this deployed site yet.", "error"); return; }
   authSubmit.disabled = true;
   setMessage(authMode === "signup" ? "Creating your account…" : "Signing you in…");
-  const email = document.getElementById("authEmail").value.trim();
-  const password = authPassword.value;
+  const email = document.getElementById(authMode === "signup" ? "authEmail" : "authEmailSignin").value.trim();
+  const password = document.getElementById(authMode === "signup" ? "authPassword" : "authPasswordSignin").value;
+  const signupProfile = { display_name: document.getElementById("displayName").value.trim(), username: document.getElementById("signupUsername").value.trim(), bio: document.getElementById("signupBio").value.trim(), account_type: document.getElementById("accountType").value };
   const result = authMode === "signup"
-    ? await supabase.auth.signUp({ email, password, options: { data: { display_name: displayName.value.trim() } } })
+    ? await supabase.auth.signUp({ email, password, options: { data: signupProfile } })
     : await supabase.auth.signInWithPassword({ email, password });
   authSubmit.disabled = false;
   if (result.error) { setMessage(result.error.message, "error"); return; }
   if (authMode === "signup" && !result.data.session) {
     setMessage("Account created. Check your email for the confirmation link, then sign in.", "success");
     authForm.reset(); return;
+  }
+  if (result.data.session && authMode === "signup") {
+    const { error: profileError } = await supabase.from("profiles").update(signupProfile).eq("id", result.data.user.id);
+    if (profileError) { setMessage("Account created, but profile setup needs attention: " + profileError.message, "error"); return; }
   }
   setMessage(authMode === "signup" ? "Your account is ready." : "Signed in successfully.", "success");
   updateAccountUI(result.data.user);
