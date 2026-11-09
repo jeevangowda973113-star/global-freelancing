@@ -89,3 +89,8 @@ The database trigger creates a basic profile after signup. This is an early auth
 The Netlify Functions now include profile read/update, proposal submission/listing, private conversation creation/listing, message read/send, and report submission. These routes use the signed-in user's Supabase access token and depend on database RLS policies for authorization. Conversation membership is created through the `start_conversation` database function; clients cannot directly insert membership rows.
 
 This is still an MVP backend foundation. It does not yet include production rate limiting, moderator/admin review tools, file uploads, payment processing, dispute handling, anti-fraud detection, or independent penetration testing. Do not treat reports as automatically reviewed, and do not use this for real-money transactions until the relevant legal, provider, and security work is completed.
+
+
+## Latest UI refresh
+
+The homepage now has a dark, Fiverr-inspired visual direction while retaining the Global Freelancing name, including an updated hero/search area, popular category navigation, and responsive styling. This change is part of the early marketplace UI prototype; it does not imply that all marketplace workflows are complete.
