@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10131d" />
+  <meta name="description" content="A global marketplace connecting clients with independent talent." />
+  <title>Global Freelancing — Find talent. Make progress.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Global Freelancing home"><span class="brand-mark">G</span><span>global<span class="brand-light">freelancing</span></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#explore">Explore</a><a href="#how-it-works">How it works</a><a href="#categories">Categories</a>
+    </nav>
+    <div class="header-actions">
+      <button class="text-button" id="signInBtn">Sign in</button>
+      <button class="button button-small" id="joinBtn">Join free <span aria-hidden="true">↗</span></button>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> A world of talent, within reach</div>
+        <h1>Great work starts<br>with <span>the right people.</span></h1>
+        <p class="hero-copy">Find skilled independent professionals, discover new opportunities, and turn good ideas into great work — wherever you are.</p>
+        <form class="search-bar" id="searchForm">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="What service are you looking for?" aria-label="Search services">
+          <button class="button search-submit" type="submit">Explore talent <span>→</span></button>
+        </form>
+        <div class="popular-searches"><span>Popular:</span><button data-search="Website design">Website design</button><button data-search="Video editing">Video editing</button><button data-search="Logo design">Logo design</button></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="hero-card card-main"><div class="mini-label">CREATIVE COLLABORATION</div><div class="avatar-stack"><span class="avatar av-one">A</span><span class="avatar av-two">M</span><span class="avatar av-three">J</span><span class="avatar av-four">S</span></div><strong>Ideas become impact.</strong><small>Talent has no borders.</small></div>
+        <div class="floating-note note-top"><span class="note-icon">✦</span><span><b>Find your next</b><small>great collaboration</small></span></div>
+        <div class="floating-note note-bottom"><span class="online-dot"></span><span><b>Global community</b><small>Built for everyone</small></span></div>
+        <div class="hero-spark spark-one">✳</div><div class="hero-spark spark-two">✦</div>
+      </div>
+    </section>
+
+    <section class="trust-strip"><span>One place to move your ideas forward</span><div class="trust-items"><span>✳ Design</span><span>⌘ Development</span><span>◈ Writing</span><span>▣ Video</span><span>◎ Marketing</span></div></section>
+
+    <section class="section categories-section" id="categories">
+      <div class="section-heading"><div><div class="eyebrow muted-eyebrow">DISCOVER WHAT'S POSSIBLE</div><h2>Explore by category</h2><p>Find the skills that help bring your next idea to life.</p></div><a class="arrow-link" href="#explore">Browse services <span>→</span></a></div>
+      <div class="category-grid">
+        <button class="category-card active" data-category="All"><span class="category-icon purple">✳</span><b>All services</b><small>Explore everything</small></button>
+        <button class="category-card" data-category="Design"><span class="category-icon orange">◈</span><b>Graphics & Design</b><small>Visualize your ideas</small></button>
+        <button class="category-card" data-category="Development"><span class="category-icon blue">⌘</span><b>Programming</b><small>Build something great</small></button>
+        <button class="category-card" data-category="Writing"><span class="category-icon green">✎</span><b>Writing & Content</b><small>Find the right words</small></button>
+        <button class="category-card" data-category="Video"><span class="category-icon pink">▣</span><b>Video & Animation</b><small>Tell your story</small></button>
+        <button class="category-card" data-category="Marketing"><span class="category-icon yellow">↗</span><b>Digital Marketing</b><small>Reach more people</small></button>
+      </div>
+    </section>
+
+    <section class="section services-section" id="explore">
+      <div class="section-heading"><div><div class="eyebrow muted-eyebrow">A PLACE TO BEGIN</div><h2>Discover talented people</h2><p>A preview of the kinds of services this marketplace will support.</p></div><span class="demo-tag">SAMPLE LISTINGS</span></div>
+      <div class="filter-row"><div class="filter-label">Featured services</div><div class="filter-pills"><button class="filter-pill selected" data-filter="All">All</button><button class="filter-pill" data-filter="Design">Design</button><button class="filter-pill" data-filter="Development">Development</button><button class="filter-pill" data-filter="Writing">Writing</button><button class="filter-pill" data-filter="Video">Video</button><button class="filter-pill" data-filter="Marketing">Marketing</button></div></div>
+      <div class="service-grid" id="serviceGrid">
+        <article class="service-card" data-category="Design" data-title="Brand identity and logo design"><div class="service-visual visual-brand"><span class="visual-shape shape-a"></span><span class="visual-shape shape-b"></span><span class="visual-word">FORMA</span><span class="visual-caption">BRAND SYSTEM / 01</span></div><div class="service-info"><div class="seller"><span class="seller-avatar seller-a">N</span><span><b>North Studio</b><small>Brand designer · Sample profile</small></span></div><h3>Build a memorable brand identity and logo</h3><div class="service-bottom"><span>Starting at <b>$35</b></span><span class="rating">★ New</span></div></div></article>
+        <article class="service-card" data-category="Development" data-title="Responsive website development"><div class="service-visual visual-code"><div class="browser-bar"><i></i><i></i><i></i></div><div class="code-lines"><span></span><span></span><span></span><span></span></div><div class="code-window">build<span>.</span>better<span>()</span></div></div><div class="service-info"><div class="seller"><span class="seller-avatar seller-b">D</span><span><b>DevCraft</b><small>Web developer · Sample profile</small></span></div><h3>Create a responsive website for your project</h3><div class="service-bottom"><span>Starting at <b>$80</b></span><span class="rating">★ New</span></div></div></article>
+        <article class="service-card" data-category="Video" data-title="Short form video editing"><div class="service-visual visual-video"><div class="video-frame"><span>PLAY</span></div><div class="video-side"><i></i><i></i><i></i></div><span class="video-tag">STORY / MOTION</span></div><div class="service-info"><div class="seller"><span class="seller-avatar seller-c">K</span><span><b>Frame Theory</b><small>Video editor · Sample profile</small></span></div><h3>Edit engaging short-form social videos</h3><div class="service-bottom"><span>Starting at <b>$25</b></span><span class="rating">★ New</span></div></div></article>
+        <article class="service-card" data-category="Writing" data-title="Website copywriting"><div class="service-visual visual-writing"><span class="writing-kicker">WORDS THAT WORK</span><strong>Make<br>it <em>matter.</em></strong><span class="writing-lines"></span></div><div class="service-info"><div class="seller"><span class="seller-avatar seller-d">R</span><span><b>Riya Writes</b><small>Copywriter · Sample profile</small></span></div><h3>Write clear website copy that connects</h3><div class="service-bottom"><span>Starting at <b>$30</b></span><span class="rating">★ New</span></div></div></article>
+      </div>
+      <p class="empty-state" id="emptyState" hidden>No sample services match that search. Try another keyword or category.</p>
+      <p class="prototype-note">These are demonstration listings, not verified or available sellers. Real profiles and service publishing will be added in a later development stage.</p>
+    </section>
+
+    <section class="how-section" id="how-it-works"><div class="section how-inner"><div class="eyebrow">SIMPLE BY DESIGN</div><h2>Good work happens<br><span>when people connect.</span></h2><div class="steps-grid"><div class="step"><span>01</span><div class="step-icon">⌕</div><h3>Discover</h3><p>Explore services and find people with the skills your project needs.</p></div><div class="step"><span>02</span><div class="step-icon">✧</div><h3>Connect</h3><p>Share your brief, ask questions, and agree on what success looks like.</p></div><div class="step"><span>03</span><div class="step-icon">↗</div><h3>Create</h3><p>Collaborate, make progress, and bring your idea into the world.</p></div></div></div></section>
+
+    <section class="cta-section"><div class="cta-orb"></div><div class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div><h2>Ready to make<br>something <span>happen?</span></h2><p>Whether you have a skill to share or a project to start, there's a place for you here.</p><button class="button cta-button" id="ctaJoin">Be part of the beginning <span>→</span></button></section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="#"><span class="brand-mark">G</span><span>global<span class="brand-light">freelancing</span></span></a><span>Connecting Global Talent with Opportunities.</span><span>© <span id="year"></span> Global Freelancing · Early preview</span></footer>
+
+  <div class="modal-backdrop" id="modal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div class="modal-symbol">G</div><div class="eyebrow muted-eyebrow">COMING IN A FUTURE UPDATE</div><h2 id="modalTitle">Accounts are not ready yet.</h2><p>We're building the marketplace foundation first. Sign-up, secure profiles, messaging, and trust features will arrive in later stages.</p><button class="button modal-button" id="modalOk">Got it</button></section></div>
+  <script src="app.js"></script>
+</body>
+</html>
