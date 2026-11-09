@@ -94,6 +94,14 @@ document.addEventListener("keydown", (event) => { if (event.key === "Escape") cl
 signInTab.addEventListener("click", () => setMode("signin"));
 signUpTab.addEventListener("click", () => setMode("signup"));
 
+async function syncSignupProfile(user) {
+  const meta = user?.user_metadata || {};
+  if (!user || !meta.username || !meta.account_type) return;
+  const profile = { display_name: String(meta.display_name || "").slice(0,80), username: String(meta.username), bio: String(meta.bio || "").slice(0,300), account_type: meta.account_type };
+  const { error } = await supabase.from("profiles").update(profile).eq("id", user.id);
+  if (error) console.warn("Profile setup could not be completed:", error.message);
+}
+
 function updateAccountUI(user) {
   const signIn = document.getElementById("signInBtn");
   const join = document.getElementById("joinBtn");
@@ -116,7 +124,11 @@ signOutButton.addEventListener("click", async () => {
 });
 
 function renderSignupStep() {
-  document.querySelectorAll(".signup-step").forEach((step) => { step.hidden = Number(step.dataset.step) !== signupStep; });
+  document.querySelectorAll(".signup-step").forEach((step) => {
+    const active = Number(step.dataset.step) === signupStep;
+    step.hidden = !active;
+    step.querySelectorAll("input,select,textarea").forEach((field) => { field.disabled = !active; });
+  });
   document.getElementById("signupProgressText").textContent = `Step ${signupStep} of 3`;
   document.getElementById("signupProgressBar").style.width = `${signupStep / 3 * 100}%`;
   signupBack.disabled = signupStep === 1;
@@ -153,6 +165,7 @@ authForm.addEventListener("submit", async (event) => {
     if (profileError) { setMessage("Account created, but profile setup needs attention: " + profileError.message, "error"); return; }
   }
   setMessage(authMode === "signup" ? "Your account is ready." : "Signed in successfully.", "success");
+  await syncSignupProfile(result.data.user);
   updateAccountUI(result.data.user);
   setTimeout(closeModal, 900);
 });
@@ -166,7 +179,11 @@ async function initializeAuth() {
     supabase = createClient(config.url, config.anonKey);
     const { data: { session } } = await supabase.auth.getSession();
     updateAccountUI(session?.user || null);
-    supabase.auth.onAuthStateChange((_event, nextSession) => updateAccountUI(nextSession?.user || null));
+    if (session?.user) await syncSignupProfile(session.user);
+    supabase.auth.onAuthStateChange((_event, nextSession) => {
+      updateAccountUI(nextSession?.user || null);
+      if (nextSession?.user) syncSignupProfile(nextSession.user);
+    });
   } catch {
     setMessage("Supabase is not connected to this deployed site yet. Check the deployment environment variables for SUPABASE_URL and SUPABASE_ANON_KEY.", "error");
   }
