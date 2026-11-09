@@ -60,3 +60,16 @@ Netlify Free currently includes 300 monthly credits for new credit-based account
 7. Performance, accessibility, privacy, and security review before wider launch
 
 Never put private API keys, passwords, or service-role credentials in frontend code or commit them to Git.
+
+## Email authentication setup
+
+The browser sign-up and sign-in form uses Supabase Auth. The Netlify function at `/api/config` exposes only the Supabase project URL and public anon key; never put a service-role key in browser code or commit it to Git.
+
+Before deploying, add these environment variables in Netlify:
+
+- `SUPABASE_URL`: your Supabase project URL
+- `SUPABASE_ANON_KEY`: your Supabase publishable/anon public key
+
+Then redeploy the site. In Supabase Authentication settings, configure the site URL and allowed redirect URLs to match the Netlify site URL. If email confirmation is enabled, new users must confirm their email before signing in.
+
+The database trigger creates a basic profile after signup. This is an early authentication foundation, not a complete trust, identity-verification, payment, or moderation system.
