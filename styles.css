@@ -26,3 +26,14 @@
 .auth-message.error{color:#ff9b9b}.auth-message.success{color:#a8edc9}
 .auth-signout{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:#252a40;color:white;font-weight:700}
 .auth-footnote{font-size:10px!important;color:#7f899d!important;margin:15px 0 0!important}
+
+/* Expanded multi-column marketplace footer */
+.site-footer{display:block;padding:58px max(5.5vw,24px) 24px;background:#0a0d14;border-top:1px solid var(--line)}
+.footer-columns{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:34px;padding-bottom:42px}
+.footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:13px}
+.footer-column h3{font:700 14px Manrope,sans-serif;color:#f4f5fb;margin:0 0 8px;letter-spacing:-.2px}
+.footer-column a{font-size:12px;line-height:1.55;color:#9ba4b7;transition:color .2s}
+.footer-column a:hover{color:var(--mint)}
+.footer-bottom{border-top:1px solid var(--line);padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#7f899d;font-size:10px}
+@media(max-width:900px){.footer-columns{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:34px}}
+@media(max-width:600px){.footer-columns{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 20px}.footer-column a{font-size:11px}.footer-bottom{align-items:flex-start;flex-direction:column;gap:13px}}
