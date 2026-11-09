@@ -12,3 +12,17 @@
 .auth-message.error{color:#ff9b9b}.auth-message.success{color:#a8edc9}
 .auth-signout{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:#252a40;color:white;font-weight:700}
 .auth-footnote{font-size:10px!important;color:#7f899d!important;margin:15px 0 0!important}
+
+/* Authentication */
+.auth-modal{max-height:90vh;overflow:auto}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;background:#111622;border:1px solid var(--line);border-radius:10px;margin:20px 0}
+.auth-tab{border:0;border-radius:7px;padding:10px;background:transparent;color:#9fa8b9;font-size:12px;font-weight:700}
+.auth-tab.active{background:#2a3043;color:#fff}
+.auth-modal label{display:block;color:#cbd1df;font-size:11px;font-weight:700;margin:14px 0}
+.auth-modal input{display:block;width:100%;margin-top:7px;padding:13px 12px;border-radius:9px;border:1px solid var(--line);background:#111622;color:#fff;font:inherit;font-size:13px;outline:none}
+.auth-modal input:focus{border-color:#9c8cff}
+.auth-modal input::placeholder{color:#6f798c}
+.auth-message{min-height:18px;font-size:11px;line-height:1.5;color:#aeb6c7}
+.auth-message.error{color:#ff9b9b}.auth-message.success{color:#a8edc9}
+.auth-signout{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:#252a40;color:white;font-weight:700}
+.auth-footnote{font-size:10px!important;color:#7f899d!important;margin:15px 0 0!important}
