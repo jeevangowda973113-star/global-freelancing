@@ -130,7 +130,7 @@ async function initializeAuth() {
     updateAccountUI(session?.user || null);
     supabase.auth.onAuthStateChange((_event, nextSession) => updateAccountUI(nextSession?.user || null));
   } catch {
-    setMessage("Supabase is not connected to this deployed site yet. Add SUPABASE_URL and SUPABASE_ANON_KEY in Netlify environment variables.", "error");
+    setMessage("Supabase is not connected to this deployed site yet. Check the deployment environment variables for SUPABASE_URL and SUPABASE_ANON_KEY.", "error");
   }
 }
 
